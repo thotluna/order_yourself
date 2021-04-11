@@ -2,14 +2,48 @@
   "name": "order_yourself",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT license",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint:css:fix": "yarn lint:css:prettier:fix && yarn lint:css:stylelint:fix",
+    "lint:css:prettier:fix": "yarn lint:css:prettier --write",
+    "lint:css:prettier": "prettier '**/*.css' --list-different --ignore-path .gitignore",
+    "lint:css:stylelint:fix": "yarn lint:css:stylelint --fix",
+    "lint:css:stylelint": "stylelint '**/*.css' --ignore-path .gitignore",
+    "lint:css": "run-s lint:css:stylelint lint:css:prettier",
+    "lint:fix": "run-p lint:js:fix lint:json:fix lint:css:fix",
+    "lint:js:fix": "yarn lint:js --fix",
+    "lint:js": "eslint --cache --ignore-path .gitignore '**/*.js'",
+    "lint:json:fix": "yarn lint:json --write",
+    "lint:json": "prettier '**/*.json' --list-different --ignore-path .gitignore",
+    "lint": "run-p lint:js lint:json lint:css",
+    "prepare": "husky install"
   },
   "dependencies": {
+    "@thot/components": "^1.10.3",
     "next": "10.1.3",
+    "next-transpile-modules": "^6.4.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.1",
+    "eslint": "^7.24.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.23.2",
+    "husky": ">=6",
+    "lint-staged": ">=10",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.2.1",
+    "stylelint": "^13.12.0",
+    "stylelint-config-idiomatic-order": "^8.1.0",
+    "stylelint-config-standard": "^21.0.0"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.lint:css:prettier": "stylelint --fix"
   }
 }

@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import { Buttons } from '@thot/components'
 
 export default function Home() {
   return (
@@ -48,6 +49,9 @@ export default function Home() {
             </p>
           </a>
         </div>
+        <Buttons ariaLabel="button" onCLick={function noRefCheck() {}}>
+          button
+        </Buttons>
       </main>
 
       <footer className={styles.footer}>
